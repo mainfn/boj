@@ -5,26 +5,23 @@ use std::{
 
 fn main() {
     let m = input_line_splitted_as::<i32>()[1];
-    let mut nums = input_all_splitted_as::<i32>();
-    nums.sort();
+    let nums = input_all_splitted_as::<i32>();
 
-    let mut ans = 0;
+    let mut closest_sum = 0;
+    let n = nums.len();
 
-    for n1 in nums.iter() {
-        for n2 in nums.iter() {
-            for n3 in nums.iter() {
-                if n1 == n2 || n2 == n3 || n3 == n1 {
-                    continue;
-                }
-                let sum = n1 + n2 + n3;
-                if sum <= m && sum > ans {
-                    ans = sum;
+    for i in 0..n - 2 {
+        for j in i + 1..n - 1 {
+            for k in j + 1..n {
+                let sum = nums[i] + nums[j] + nums[k];
+                if sum <= m && sum > closest_sum {
+                    closest_sum = sum;
                 }
             }
         }
     }
 
-    println!("{ans}");
+    println!("{closest_sum}");
 }
 
 fn input_line_splitted_as<T>() -> Vec<T>
