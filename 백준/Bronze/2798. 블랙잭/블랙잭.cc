@@ -14,24 +14,20 @@ int main() {
   }
   sort(nums.begin(), nums.end());
 
-  int max_sum = 0;
-  for (int i = 0; i < nums.size(); i++) {
-    for (int j = 0; j < nums.size(); j++) {
-      if (j == i)
-        continue;
-      for (int k = 0; k < nums.size(); k++) {
-        if (k == i || k == j)
-          continue;
+  int closest_sum = 0;
 
+  for (int i = 0; i < n - 2; i++) {
+    for (int j = i + 1; j < n - 1; j++) {
+      for (int k = j + 1; k < n; k++) {
         int sum = nums[i] + nums[j] + nums[k];
-        if (sum > max_sum && sum <= m) {
-          max_sum = sum;
+        if (sum > closest_sum && sum <= m) {
+          closest_sum = sum;
         }
       }
     }
   }
 
-  cout << max_sum;
+  cout << closest_sum;
 
   return 0;
 }
